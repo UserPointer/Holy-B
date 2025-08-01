@@ -44,6 +44,6 @@ void main() {
 	auto tokens = lex(source);
 	
 	foreach(token; tokens) {
-		writefln("Type: %s, value: %s", token.type, token.value);
+		writefln("Type: %s, value: %s, pos: %s", token.type, token.value, token.pos);
 	}
 }
