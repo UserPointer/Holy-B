@@ -39,7 +39,7 @@ Token[] lex(string source) {
 }
 
 void main() {
-	string source = "/* I am gay */";
+	string source = "variable";
 	
 	auto tokens = lex(source);
 	
