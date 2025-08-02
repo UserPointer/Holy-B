@@ -1,7 +1,10 @@
 module lexer.lexer;
 
 import std.stdio;
+import std.uni : isAlpha;
+import std.ascii : isDigit;
 import lexer.tokens;
+import std.exception;
 
 Token[] lex(string source) {
 	Token[] tokens;
@@ -33,13 +36,59 @@ Token[] lex(string source) {
 			
 			continue;
 		}
+		
+		else if(source[pos].isAlpha || source[pos] == '_') {
+			size_t start = pos;
+			
+			while(pos < source.length && (source[pos].isAlpha || source[pos].isDigit || source[pos] == '_')) {
+				++pos;
+			}
+			
+			tokens ~= new Token(TokenType.IDENTIFIER, source[start..pos], pos);
+			
+			continue;
+		}
+		
+		else if(source[pos].isDigit) {
+			size_t start = pos;
+			
+			while(pos < source.length && source[pos].isDigit) {
+				++pos;
+			}
+			
+			tokens ~= new Token(TokenType.NUMBER, source[start..pos], pos);
+			
+			continue;
+		}
+		
+		else if(source[pos] == '"') {
+			++pos;
+		
+			size_t start = pos;
+			
+			while(pos < source.length && source[pos] != '"') {
+				++pos;
+			}
+			
+			if(pos >= source.length) {
+				throw new Exception("Error: there is no closing parenthesis");				
+			}
+
+			tokens ~= new Token(TokenType.STRING, source[start..pos], pos);
+			
+			++pos;
+			
+			continue;
+		}
 	}
+	
+	tokens ~= new Token(TokenType.EOF, "", pos);
 	
 	return tokens;
 }
 
 void main() {
-	string source = "variable";
+	string source = `"This is string"`;
 	
 	auto tokens = lex(source);
 	

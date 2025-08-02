@@ -3,13 +3,23 @@ module lexer.tokens;
 import std.string;
 
 enum TokenType {
-	VOID,
 	MAIN,
+	VOID,
+	AUTO,
+	WORD,
 	
 	LPAREN,
 	RPAREN,
 	LBRACE,
 	RBRACE,
+	
+	IDENTIFIER,
+	
+	NUMBER,
+	STRING,
+	
+	ASSIGN,
+	SEMICOLON,
 	
 	EOF
 }
