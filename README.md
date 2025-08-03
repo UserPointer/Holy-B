@@ -4,4 +4,4 @@
 <img src = "images/HolyB.png" height = 400>
 <p>
 
-Holy B - inspired by the language B and Holy C.
+Holy B is a sacred programming language to make it easy to communicate with God on any device.
