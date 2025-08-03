@@ -43,8 +43,18 @@ Token[] lex(string source) {
 			while(pos < source.length && (source[pos].isAlpha || source[pos].isDigit || source[pos] == '_')) {
 				++pos;
 			}
-			
-			tokens ~= new Token(TokenType.IDENTIFIER, source[start..pos], pos);
+
+			if(source[start..pos] == "main") {
+				tokens ~= new Token(TokenType.MAIN, source[start..pos], pos);
+			} else if(source[start..pos] == "void") {
+				tokens ~= new Token(TokenType.VOID, source[start..pos], pos);
+			} else if(source[start..pos] == "auto") {
+				tokens ~= new Token(TokenType.AUTO, source[start..pos], pos);
+			} else if(source[start..pos] == "word") {
+				tokens ~= new Token(TokenType.WORD, source[start..pos], pos);
+			} else {
+				tokens ~= new Token(TokenType.IDENTIFIER, source[start..pos], pos);
+			}
 			
 			continue;
 		}
@@ -80,6 +90,25 @@ Token[] lex(string source) {
 			
 			continue;
 		}
+
+		switch(source[pos]) {
+			case '=':
+				tokens ~= new Token(TokenType.ASSIGN, "=", pos);
+
+				++pos;
+
+				break;
+
+			case ';':
+				tokens ~= new Token(TokenType.SEMICOLON, ";", pos);
+
+				++pos;
+
+				break;
+
+			default:
+				throw new Exception("Error: unknown a symbol");
+		}
 	}
 	
 	tokens ~= new Token(TokenType.EOF, "", pos);
@@ -88,7 +117,7 @@ Token[] lex(string source) {
 }
 
 void main() {
-	string source = `"This is string"`;
+	string source = `word str = "Hello, World!";`;
 	
 	auto tokens = lex(source);
 	
