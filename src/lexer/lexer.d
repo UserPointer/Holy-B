@@ -46,12 +46,6 @@ Token[] lex(string source) {
 
 			if(source[start..pos] == "main") {
 				tokens ~= new Token(TokenType.MAIN, source[start..pos], pos);
-			} else if(source[start..pos] == "void") {
-				tokens ~= new Token(TokenType.VOID, source[start..pos], pos);
-			} else if(source[start..pos] == "auto") {
-				tokens ~= new Token(TokenType.AUTO, source[start..pos], pos);
-			} else if(source[start..pos] == "word") {
-				tokens ~= new Token(TokenType.WORD, source[start..pos], pos);
 			} else {
 				tokens ~= new Token(TokenType.IDENTIFIER, source[start..pos], pos);
 			}
@@ -117,7 +111,7 @@ Token[] lex(string source) {
 }
 
 void main() {
-	string source = `word str = "Hello, World!";`;
+	string source = `str = "Hello, World!";`;
 	
 	auto tokens = lex(source);
 	
