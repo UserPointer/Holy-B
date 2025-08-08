@@ -3,6 +3,7 @@ module lexer.tokens;
 import std.string;
 
 enum TokenType {
+	FN,
 	MAIN,
 	
 	LPAREN,
