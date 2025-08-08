@@ -47,6 +47,8 @@ Token[] lex(string source) {
 
 			if(source[start..pos] == "main") {
 				tokens ~= new Token(TokenType.MAIN, source[start..pos], pos);
+			} else if(source[start..pos] == "fn") {
+				tokens ~= new Token(TokenType.FN, source[start..pos], pos);
 			} else {
 				tokens ~= new Token(TokenType.IDENTIFIER, source[start..pos], pos);
 			}
@@ -140,7 +142,7 @@ Token[] lex(string source) {
 }
 
 void main() {
-	string source = `main() { variable % = 128; }`;
+	string source = `fn main() { variable = 128; }`;
 
 	auto tokens = lex(source);
 	
