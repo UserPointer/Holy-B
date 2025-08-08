@@ -4,9 +4,6 @@ import std.string;
 
 enum TokenType {
 	MAIN,
-	VOID,
-	AUTO,
-	WORD,
 	
 	LPAREN,
 	RPAREN,
