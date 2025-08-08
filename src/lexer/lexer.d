@@ -6,6 +6,7 @@ import std.ascii : isDigit;
 import lexer.tokens;
 import std.exception;
 
+
 Token[] lex(string source) {
 	Token[] tokens;
 	size_t pos = 0;
@@ -100,8 +101,36 @@ Token[] lex(string source) {
 
 				break;
 
+			case '(':
+				tokens ~= new Token(TokenType.LPAREN, "(", pos);
+
+				++pos;
+
+				break;
+
+			case ')':
+				tokens ~= new Token(TokenType.RPAREN, ")", pos);
+
+				++pos;
+
+				break;
+
+			case '{':
+				tokens ~= new Token(TokenType.LBRACE, "{", pos);
+
+				++pos;
+
+				break;
+
+			case '}':
+				tokens ~= new Token(TokenType.RBRACE, "}", pos);
+
+				++pos;
+
+				break;
+
 			default:
-				throw new Exception("Error: unknown a symbol");
+				throw new Exception("Error: unknown a symbol: " ~ source[pos]);
 		}
 	}
 	
@@ -111,8 +140,8 @@ Token[] lex(string source) {
 }
 
 void main() {
-	string source = `str = "Hello, World!";`;
-	
+	string source = `main() { variable % = 128; }`;
+
 	auto tokens = lex(source);
 	
 	foreach(token; tokens) {
