@@ -1,6 +1,7 @@
 name "hbc"
 description "HBC this compiler for language Holy B"
-author "UserPointer, PAPKA"
+author "UserPointer"
 copyright "Copyright © 2024, UserPointer"
 license "MIT"
+
 targetType "executable"
